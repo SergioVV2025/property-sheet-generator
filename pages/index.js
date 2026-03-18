@@ -173,7 +173,7 @@ function fillForm(id, form) {
     currentPropEntries[prop] = value;
   }
 
-  const BASE_URL = "https://sergiovv2025.github.io/fichas_tecnicas/";
+  const BASE_URL = "https://sergiovv2025.github.io/property-sheet-generator/";
   const heroPath = currentProperty.hero || "";
   let splitClassName = [],
     formInput,
