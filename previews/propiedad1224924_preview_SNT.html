@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>Loft moderno con amenidades premium en Santa Fe</title>
+
+<link rel="stylesheet" href="../blocks/property.css" />
+
+<meta property="og:title" content="Loft moderno con amenidades premium en Santa Fe" />
+<meta property="og:description" content="Loft moderno ubicado en una de las zonas corporativas más importantes de la ciudad. Cuenta con espacios optimizados, excelente iluminación natural y acceso a amenidades exclusivas como gimnasio, alberca y áreas sociales. Ideal para profesionistas que buscan comodidad, conectividad y estilo de vida urbano." />
+<meta property="og:image" content="https://sergiovv2025.github.io/property-sheet-generator/images/demo1_hero.jpg" />
+<meta property="og:url" content="https://sergiovv2025.github.io/property-sheet-generator/previews/propiedad1224924_preview.html" />
+<meta property="og:type" content="website" />
+
+</head>
+
+<body class="theme-modern">
+  <main class="property">
+
+    <section class="property__content">
+
+      <div>
+        <img class="property__hero-image" src="https://sergiovv2025.github.io/property-sheet-generator/images/demo1_hero.jpg" alt="Loft moderno con amenidades premium en Santa Fe" />
+      </div>
+
+      <div>
+        <h1 class="property__title">Loft moderno con amenidades premium en Santa Fe</h1>
+        <p class="property__price">3,900,000.00 MXN</p>
+      </div>
+
+      <div>
+        <ul class="property__features-list">
+          <li class="property__feature">Superficie: 50 m²</li><li class="property__feature">Recámaras: 1 (tipo loft)</li><li class="property__feature">Baños: 1</li><li class="property__feature">Estacionamiento: 1</li><li class="property__feature">Alberca</li><li class="property__feature">Gimnasio</li><li class="property__feature">Restaurante</li><li class="property__feature">Cancha de pádel</li><li class="property__feature">Salón de eventos</li><li class="property__feature">Cine</li><li class="property__feature">Sauna</li><li class="property__feature">Vapor</li><li class="property__feature">Salón social</li>
+        </ul>
+      </div>
+
+      <div>
+        <p class="property__description">Loft moderno ubicado en una de las zonas corporativas más importantes de la ciudad. Cuenta con espacios optimizados, excelente iluminación natural y acceso a amenidades exclusivas como gimnasio, alberca y áreas sociales. Ideal para profesionistas que buscan comodidad, conectividad y estilo de vida urbano.</p>
+      </div>
+
+      <div class="property__image-gallery">
+        <img class="property__image" src="https://sergiovv2025.github.io/property-sheet-generator/images/demo1_bathroom.jpg" alt="Loft moderno con amenidades premium en Santa Fe">
+        <button class="property__btn property__btn-left" id="btnBack">
+          <img class="property__btn_image" src="https://sergiovv2025.github.io/property-sheet-generator/images/arrow_back.png" alt="Left arrow">
+        </button>
+        <button class="property__btn property__btn-right" id="btnForward">
+          <img class="property__btn_image" src="https://sergiovv2025.github.io/property-sheet-generator/images/arrow_forward.png" alt="Right arrow">
+        </button>
+      </div>
+      <div class="property__counter" id="imageCounter">
+        1 / 1
+      </div>
+        
+      <div>
+      <p class="property__location-label">Santa Fe, CDMX</p>
+        <a
+        href="https://www.google.com/maps?q=Santa%20Fe%2C%20CDMX"
+        target="_blank"
+        class="property__map-link"
+        >
+          Ir a ubicación &rarr;
+        </a>
+      </div>
+    </section>
+
+  </main>
+<script>
+  (function () {
+    const images = ["https://sergiovv2025.github.io/property-sheet-generator/images/demo1_bathroom.jpg","https://sergiovv2025.github.io/property-sheet-generator/images/demo1_gym.jpeg","https://sergiovv2025.github.io/property-sheet-generator/images/demo1_kitchen.jpg","https://sergiovv2025.github.io/property-sheet-generator/images/demo1_paddel.jpeg","https://sergiovv2025.github.io/property-sheet-generator/images/demo1_parking.jpg","https://sergiovv2025.github.io/property-sheet-generator/images/demo1_room.jpg"];
+    let currentIndex = 0;
+
+    const img = document.querySelector(".property__image");
+    const btnBack = document.getElementById("btnBack");
+    const btnForward = document.getElementById("btnForward");
+    const counter = document.getElementById("imageCounter");
+
+    if (!img || !btnBack || !btnForward || images.length === 0) return;
+
+    function updateSlider() {
+      img.src = images[currentIndex];
+
+      if (counter) {
+        counter.textContent = (currentIndex + 1) + " / " + images.length;
+      }
+    }
+
+    // 🔹 render inicial
+    updateSlider();
+
+    btnForward.addEventListener("click", () => {
+      currentIndex = (currentIndex + 1) % images.length;
+      updateSlider();
+    });
+
+    btnBack.addEventListener("click", () => {
+      currentIndex =
+        (currentIndex - 1 + images.length) % images.length;
+      updateSlider();
+    });
+  })();
+
+</script>
+
+</body>
+</html>
