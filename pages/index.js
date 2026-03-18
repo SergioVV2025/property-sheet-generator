@@ -41,7 +41,7 @@ const handleCardClick = (id, time) => {
     return;
   } else {
     window.open(`./previews/propiedad${id}${time}_preview.html`, "_blank");
-    // window.open(`https://sergiovv2025.github.io/fichas_tecnicas/previews/propiedad${id}${time}_preview.html`, "_blank");
+    // window.open(`https://sergiovv2025.github.io/property-sheet-generator/previews/propiedad${id}${time}_preview.html`, "_blank");
   }
 };
 
