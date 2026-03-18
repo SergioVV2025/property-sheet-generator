@@ -233,7 +233,7 @@ body {
 }
 
 .property__agent-broker::before {
-  content: url(../images/person.png);
+  content: url(../images/person_2.png);
   position: relative;
   top: 2px;
 }
