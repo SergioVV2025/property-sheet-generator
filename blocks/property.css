@@ -226,16 +226,20 @@ body {
   line-height: 0.9rem;
   color: #7d7d7d;
   font-weight: 500;
-  text-align: center;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
+.property__agent-broker {
+  position: relative;
+  top: -7px;
+}
+
 .property__agent-broker::before {
   content: url(../images/person_2.png);
   position: relative;
-  top: 4px;
+  top: 7px;
 }
 
 .property__agent-phone {
