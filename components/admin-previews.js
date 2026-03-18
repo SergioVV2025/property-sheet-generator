@@ -62,7 +62,7 @@ function fillPreview(previewData) {
   <div class="property__agent">
     <div class="property__agent-broker">&nbsp;Sergio Verástegui Vega</div>
     <div class="property__agent-phone">
-      <a class="property__agent-number" href="tel:5552178925">&nbsp;55 5217 8925 5840</a>
+      <a class="property__agent-number" href="tel:5552178925">&nbsp;55 5217 8925</a>
     </div>
   </div>
   `;
