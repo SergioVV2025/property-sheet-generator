@@ -55,14 +55,14 @@ function fillPreview(previewData) {
 
     return `
   <div class="property__cta">
-    <a class="property__cta-button" href="https://wa.me/5215522425840?text=${encodeURIComponent(`Hola, estoy interesado en la propiedad "${title}".\n¿Podrías darme más información?`)}" target="_blank  ">
+    <a class="property__cta-button" href="https://wa.me/5215552178925?text=${encodeURIComponent(`Hola, estoy interesado en la propiedad "${title}".\n¿Podrías darme más información?`)}" target="_blank  ">
       Contactar por WhatsApp
     </a>
   </div>
   <div class="property__agent">
-    <div class="property__agent-broker">&nbsp;Carolina Guerrero</div>
+    <div class="property__agent-broker">&nbsp;Sergio Verástegui Vega</div>
     <div class="property__agent-phone">
-      <a class="property__agent-number" href="tel:5522425840">&nbsp;55 2242 5840</a>
+      <a class="property__agent-number" href="tel:5552178925">&nbsp;55 5217 8925 5840</a>
     </div>
   </div>
   `;
