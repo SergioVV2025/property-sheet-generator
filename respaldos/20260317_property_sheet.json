@@ -8,14 +8,14 @@
       "description": "Loft moderno ubicado en una de las zonas corporativas más importantes de la ciudad. Cuenta con espacios optimizados, excelente iluminación natural y acceso a amenidades exclusivas como gimnasio, alberca y áreas sociales. Ideal para profesionistas que buscan comodidad, conectividad y estilo de vida urbano.",
       "features": "Superficie: 50 m²\nRecámaras: 1 (tipo loft)\nBaños: 1\nEstacionamiento: 1\nAlberca\nGimnasio\nRestaurante\nCancha de pádel\nSalón de eventos\nCine\nSauna\nVapor\nSalón social",
       "gallery": [
+        "./images/demo1_room.jpg",
+        "./images/demo1_kitchen.jpg",
         "./images/demo1_bathroom.jpg",
         "./images/demo1_gym.jpeg",
-        "./images/demo1_kitchen.jpg",
         "./images/demo1_paddel.jpeg",
-        "./images/demo1_parking.jpg",
-        "./images/demo1_room.jpg"
+        "./images/demo1_parking.jpg"
       ],
-      "time": "224924",
+      "time": "234440",
       "theme": "theme-modern",
       "address": "Santa Fe, CDMX",
       "isLiked": false
