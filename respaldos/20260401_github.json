@@ -15,7 +15,7 @@
         "./images/demo1_paddel.jpeg",
         "./images/demo1_parking.jpg"
       ],
-      "time": "234440",
+      "time": "084726",
       "theme": "theme-modern",
       "address": "Santa Fe, CDMX",
       "isLiked": false
@@ -34,8 +34,8 @@
         "./images/demo2_cocina.jpg",
         "./images/demo2_comedor.jpg"
       ],
-      "time": "161738",
-      "theme": "theme-luxury",
+      "time": "084932",
+      "theme": "theme-rock",
       "address": "Narvarte, CDMX",
       "isLiked": false
     },
@@ -52,11 +52,11 @@
         "./images/demo3_cocina.jpeg",
         "./images/demo3_comedor.jpeg"
       ],
-      "time": "101845",
-      "theme": "theme-minimal",
+      "time": "085147",
+      "theme": "theme-classic",
       "address": "Colonia del Valle, CDMX",
       "isLiked": false
     }
   ],
-  "publishedMaxId": 3
+  "publishedMaxId": 12
 }
