@@ -30,19 +30,33 @@ const propertiesData = StorageService.getProperties(Properties);
 
 /*---------- Función callback para manejar el click en la imagen de la tarjeta ----------*/
 
+// const handleCardClick = (id, time) => {
+//   const publishedMax = StorageService.getMaxPublishedId();
+
+//   if (Number(id) > publishedMax) {
+//     alert(
+//       "Esta propiedad aún no está publicada.\n\n" +
+//         "Debes generar el preview y subirlo a GitHub dentro de la carpeta /previews para poder compartirla.",
+//     );
+//     return;
+//   } else {
+//     window.open(`./previews/propiedad${id}${time}_preview.html`, "_blank");
+//   }
+// };
+
 const handleCardClick = (id, time) => {
   const publishedMax = StorageService.getMaxPublishedId();
 
-  if (Number(id) > publishedMax) {
+  // 👉 si NO hay nada publicado, deja pasar todo (modo demo)
+  if (publishedMax && Number(id) > publishedMax) {
     alert(
       "Esta propiedad aún no está publicada.\n\n" +
         "Debes generar el preview y subirlo a GitHub dentro de la carpeta /previews para poder compartirla.",
     );
     return;
-  } else {
-    window.open(`./previews/propiedad${id}${time}_preview.html`, "_blank");
-    // window.open(`https://sergiovv2025.github.io/property-sheet-generator/previews/propiedad${id}${time}_preview.html`, "_blank");
   }
+
+  window.open(`./previews/propiedad${id}${time}_preview.html`, "_blank");
 };
 
 /*---------- Initial Properties en properties.js ----------*/
