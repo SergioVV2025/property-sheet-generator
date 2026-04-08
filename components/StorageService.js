@@ -1,9 +1,22 @@
 class StorageService {
+  // static getProperties(defaultProperties) {
+  //   const saved = localStorage.getItem("properties");
+  //   if (saved) {
+  //     return JSON.parse(saved);
+  //   }
+  //   return defaultProperties;
+  // }
+
   static getProperties(defaultProperties) {
     const saved = localStorage.getItem("properties");
+
     if (saved) {
       return JSON.parse(saved);
     }
+
+    // 👇 ESTA LÍNEA ES LA CLAVE
+    localStorage.setItem("properties", JSON.stringify(defaultProperties));
+
     return defaultProperties;
   }
 
