@@ -1,9 +1,8 @@
 .header {
-  font-family: "Inter", Arial, sans-serif;
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 1;
+  z-index: 1000;
 }
 
 .header__nav {
@@ -16,24 +15,9 @@
 
 .nav__list {
   display: flex;
-  /* justify-content: space-between; */
   list-style-type: none;
-  width: 100%;
   margin: 0;
   padding: 0;
-  overflow: hidden;
-}
-
-.nav__list-item:hover {
-  background-color: #777;
-  border-radius: 8px;
-}
-
-.nav__list-link {
-  width: 100%;
-  text-align: left;
-  border: none;
-  background-color: transparent;
 }
 
 .nav__list-item .nav__list-link {
@@ -44,31 +28,26 @@
   color: black;
 }
 
+/* 👇 ESTE ES EL FIX CLAVE */
 .nav__dropdown {
-  display: inline-block;
+  position: relative;
 }
 
 .nav__dropdown-content {
   display: none;
   position: absolute;
-  max-width: 100%;
+  top: 100%;
+  left: 0;
+
   background-color: lightgray;
-  z-index: 1;
   border-radius: 8px;
+  padding: 8px;
+
+  min-width: 150px;
+  z-index: 1100;
 }
 
-.nav__dropdown-content .nav__list-link {
-  display: block;
-  font-size: 1.5em;
-  text-decoration: none;
-  color: black;
-}
-
+/* Hover */
 .nav__dropdown:hover .nav__dropdown-content {
   display: block;
-}
-
-.nav__dropdown-content .nav__list-link:hover {
-  background-color: #777;
-  border-radius: 8px;
 }

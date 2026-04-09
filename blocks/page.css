@@ -24,4 +24,8 @@
   .page__content {
     padding: 0 20px;
   }
+
+  .page {
+    padding-top: 70px;
+  }
 }
