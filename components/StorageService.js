@@ -16,7 +16,7 @@ class StorageService {
 
     // 👇 ESTA LÍNEA ES LA CLAVE
     localStorage.setItem("properties", JSON.stringify(defaultProperties));
-    const maxId = defaultProperties.length;
+    const maxId = Math.max(...defaultProperties.map((p) => Number(p.id)));
     localStorage.setItem("publishedMaxId", String(maxId));
 
     return defaultProperties;
