@@ -77,7 +77,7 @@ class Card {
       evt.stopPropagation();
 
       const publishedMax = StorageService.getMaxPublishedId();
-      if (Number(this._id) > publishedMax) {
+      if (publishedMax && Number(id) > publishedMax) {
         alert(
           "Esta propiedad aún no está publicada.\n\n" +
             "Debes generar el preview y subirlo a GitHub dentro de la carpeta /previews para poder compartirla.",
