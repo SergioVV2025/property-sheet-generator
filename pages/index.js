@@ -361,14 +361,14 @@ function handleImportSubmit() {
   newImportPopup.close();
 }
 
-function setFocus() {
-  const cardListFocus = document.querySelector(".cards__list");
-  const cardFocus = cardListFocus.lastElementChild;
-  const cardFocusWhats = cardFocus.querySelector(".card__whatsapp-button");
-  cardFocusWhats.focus();
-}
+// function setFocus() {
+//   const cardListFocus = document.querySelector(".cards__list");
+//   const cardFocus = cardListFocus.lastElementChild;
+//   const cardFocusWhats = cardFocus.querySelector(".card__whatsapp-button");
+//   cardFocusWhats.focus();
+// }
 
-setFocus();
+// setFocus();
 
 /*----------- Confirmation Popup -----------*/
 
