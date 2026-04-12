@@ -15,8 +15,7 @@
 
 .preview__content {
   display: flex;
-  /* justify-content: space-between; */
-  flex-direction: column;
+  justify-content: space-between;
   gap: 20px;
   max-height: 90vh;
 }
@@ -84,7 +83,7 @@
 }
 
 .preview {
-  /* max-width: 1000px; */
+  max-width: 1000px;
   width: 100%;
 }
 
@@ -226,5 +225,11 @@
   .popup__content_content_image {
     max-width: 75vw;
     padding: 0;
+  }
+
+  .preview__content {
+    display: flex;
+    flex-direction: column;
+    max-height: 90vh;
   }
 }
