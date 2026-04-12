@@ -117,6 +117,21 @@ class Card {
     });
   }
 
+  _handleLoadError() {
+    alert("Image not loaded. ERROR! ERROR!");
+  }
+
+  _handleImageLoad(evt) {
+    evt.target.append(evt.target);
+  }
+
+  _loadImage(imageElement, loadCallback, errorCallback) {
+    imageElement.onload = loadCallback;
+    imageElement.onerror = errorCallback;
+    imageElement.src = this._hero;
+    imageElement.alt = this._hero;
+  }
+
   generateCard() {
     this._cardElement = this._getTemplate();
 
@@ -127,8 +142,11 @@ class Card {
     cardTitle.textContent = this._title;
 
     const cardImage = this._cardElement.querySelector(".card__image");
-    cardImage.src = this._hero;
-    cardImage.alt = this._hero;
+    this._loadImage(
+      cardImage,
+      this._handleImageLoad.bind(this),
+      this._handleLoadError.bind(this),
+    );
 
     const cardPrice = this._cardElement.querySelector(".card__price");
     cardPrice.textContent = this._price;
