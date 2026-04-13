@@ -118,14 +118,18 @@ class Card {
   }
 
   _handleLoadError() {
+    this._spinner.classList.remove("card__spinner_visible");
     alert("Image not loaded. ERROR! ERROR!");
   }
 
   _handleImageLoad(evt) {
-    evt.target.append(evt.target);
+    this._spinner.classList.remove("card__spinner_visible");
+    evt.target.classList.add("card__image_loaded");
+    console.log("imagen cargada!!!  " + evt.target.src);
   }
 
   _loadImage(imageElement, loadCallback, errorCallback) {
+    this._spinner.classList.add("card__spinner_visible");
     imageElement.onload = loadCallback;
     imageElement.onerror = errorCallback;
     imageElement.src = this._hero;
@@ -140,6 +144,8 @@ class Card {
 
     const cardTitle = this._cardElement.querySelector(".card__title");
     cardTitle.textContent = this._title;
+
+    this._spinner = this._cardElement.querySelector(".card__spinner");
 
     const cardImage = this._cardElement.querySelector(".card__image");
     this._loadImage(
