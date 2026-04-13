@@ -22,21 +22,27 @@ Permite a los usuarios crear, editar, visualizar y persistir información de pro
 📸 Preview
 
 ### Vista de propiedades
+
 ![Property Cards](./images/cards.jpg)
 
 ### Vista previa de ficha
+
 ![Preview Modal](./images/new_preview.jpg)
 
 ### Creación de propiedad
+
 ![New Property](./images/new_property.jpg)
 
 ### Confirmación de eliminación
+
 ![Confirmation Popup](./images/confirmation_popup.jpg)
 
 ### Integración con WhatsApp
+
 ![WhatsApp Link](./images/whatsapp_link.jpg)
 
 ### Compartir propiedades
+
 ![WhatsApp Cards](./images/whatsapp_cards.jpg)
 
 🧩 Descripción
@@ -84,6 +90,18 @@ Se aplicó separación de responsabilidades para mantener el código escalable y
 - Uso de clases en JavaScript para estructurar lógica (OOP)
 - Renderizado dinámico para actualizar la UI sin recargar la página
 
+📱 Comportamiento responsive
+
+La aplicación está optimizada para uso en escritorio debido a la complejidad de los formularios de creación y edición de propiedades.
+
+En dispositivos móviles, la experiencia está enfocada en:
+
+- Visualizar propiedades
+- Navegar vistas previas
+- Compartir propiedades vía WhatsApp
+
+La creación y edición de propiedades se recomienda en escritorio para una mejor experiencia de usuario.
+
 📦 Instalación
 
 git clone https://github.com/SergioVV2025/property-sheet-generator.git
@@ -121,7 +139,6 @@ Abrir index.html en el navegador.
 ⚠️ Nota
 
 Los datos e imágenes utilizados son simulados y tienen fines demostrativos.
-
 
 🧪 Testing manual
 
