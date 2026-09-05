@@ -6,8 +6,17 @@ const Properties = [
     price: "3,900,000.00 MXN",
     description:
       "Loft moderno ubicado en una de las zonas corporativas más importantes de la ciudad. Cuenta con espacios optimizados, excelente iluminación natural y acceso a amenidades exclusivas como gimnasio, alberca y áreas sociales. Ideal para profesionistas que buscan comodidad, conectividad y estilo de vida urbano.",
-    features:
-      "Superficie: 50 m²\nRecámaras: 1 (tipo loft)\nBaños: 1\nEstacionamiento: 1\nAlberca\nGimnasio\nRestaurante\nCancha de pádel\nSalón de eventos\nCine\nSauna\nVapor\nSalón social",
+
+    construction: "50",
+    bedrooms: "1",
+    bathrooms: "1",
+    parking: "1",
+
+    features: "Distribución tipo loft\nIluminación natural\nCocina integral",
+
+    amenities:
+      "Alberca\nGimnasio\nRestaurante\nPádel\nSalón de eventos\nCine\nSauna\nVapor\nSalón social",
+
     gallery: [
       "./images/demo1_room.jpg",
       "./images/demo1_kitchen.jpg",
@@ -16,11 +25,13 @@ const Properties = [
       "./images/demo1_paddel.jpeg",
       "./images/demo1_parking.jpg",
     ],
+
     time: "084726",
     theme: "theme-modern",
     address: "Santa Fe, CDMX",
     isLiked: false,
   },
+
   {
     id: 2,
     hero: "./images/demo2_hero.jpg",
@@ -28,7 +39,16 @@ const Properties = [
     price: "2,400,000.00 MXN",
     description:
       "Departamento con excelente distribución, ideal para quienes buscan comodidad y funcionalidad en una ubicación céntrica. Cuenta con espacios bien aprovechados, iluminación natural y acceso a servicios y transporte.",
-    features: "75 m²\n2 recámaras\n1 baño\n1 estacionamiento",
+
+    construction: "75",
+    bedrooms: "2",
+    bathrooms: "1",
+    parking: "1",
+
+    features: "Buena distribución\nIluminación natural\nCocina funcional",
+
+    amenities: "",
+
     gallery: [
       "./images/demo2_bedroom.jpg",
       "./images/demo2_bedroom2.jpg",
@@ -36,11 +56,13 @@ const Properties = [
       "./images/demo2_cocina.jpg",
       "./images/demo2_comedor.jpg",
     ],
+
     time: "084932",
     theme: "theme-rock",
     address: "Narvarte, CDMX",
     isLiked: false,
   },
+
   {
     id: 3,
     hero: "./images/demo3_hero.jpg",
@@ -48,13 +70,24 @@ const Properties = [
     price: "1,850,000.00 MXN",
     description:
       "Departamento compacto con excelente ubicación, ideal para inversión o primera vivienda. Espacios prácticos y funcionales, con acceso cercano a servicios, comercios y vías principales.",
-    features: "55 m²\n1 recámara\n1 baño\nSin estacionamiento",
+
+    construction: "55",
+    bedrooms: "1",
+    bathrooms: "1",
+    parking: "0",
+
+    features:
+      "Espacios compactos\nDistribución funcional\nIdeal para inversión",
+
+    amenities: "",
+
     gallery: [
       "./images/demo3_habitacion.jpg",
       "./images/demo3_bathroom.jpeg",
       "./images/demo3_cocina.jpeg",
       "./images/demo3_comedor.jpeg",
     ],
+
     time: "085147",
     theme: "theme-classic",
     address: "Colonia del Valle, CDMX",

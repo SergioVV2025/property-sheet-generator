@@ -1,21 +1,15 @@
 class StorageService {
-  // static getProperties(defaultProperties) {
-  //   const saved = localStorage.getItem("properties");
-  //   if (saved) {
-  //     return JSON.parse(saved);
-  //   }
-  //   return defaultProperties;
-  // }
-
   static getProperties(defaultProperties) {
-    const saved = localStorage.getItem("properties");
+    const saved = localStorage.getItem("properties-demo-v2");
 
     if (saved) {
       return JSON.parse(saved);
     }
 
-    // 👇 ESTA LÍNEA ES LA CLAVE
-    localStorage.setItem("properties", JSON.stringify(defaultProperties));
+    localStorage.setItem(
+      "properties-demo-v2",
+      JSON.stringify(defaultProperties),
+    );
 
     return defaultProperties;
   }
@@ -26,7 +20,7 @@ class StorageService {
   }
 
   static saveProperties(properties) {
-    localStorage.setItem("properties", JSON.stringify(properties));
+    localStorage.setItem("properties-demo-v2", JSON.stringify(properties));
   }
 
   static addProperty(newProperty) {
@@ -37,14 +31,16 @@ class StorageService {
 
   static deleteProperty(id) {
     const current = this.getProperties([]);
+
     if (current.length === 1) {
-      localStorage.removeItem("properties");
+      localStorage.removeItem("properties-demo-v2");
       location.reload();
       return;
-    } else {
-      const updated = current.filter((p) => Number(p.id) !== Number(id));
-      this.saveProperties(updated);
     }
+
+    const updated = current.filter((p) => Number(p.id) !== Number(id));
+
+    this.saveProperties(updated);
   }
 
   static toggleIsLiked(id) {
@@ -59,21 +55,24 @@ class StorageService {
 
   static getNextId() {
     const properties = this.getProperties([]);
+
     if (properties.length === 0) return 1;
 
     const maxId = Math.max(...properties.map((p) => Number(p.id)));
+
     return maxId + 1;
   }
 
   static getMaxId() {
     const properties = this.getProperties([]);
+
     return properties.length
       ? Math.max(...properties.map((p) => Number(p.id)))
       : 0;
   }
 
   static getMaxPublishedId() {
-    const published = localStorage.getItem("publishedMaxId");
+    const published = localStorage.getItem("publishedMaxId-demo-v2");
 
     if (!published) return 0;
 
@@ -83,7 +82,7 @@ class StorageService {
   }
 
   static setMaxPublishedId(id) {
-    localStorage.setItem("publishedMaxId", String(id));
+    localStorage.setItem("publishedMaxId-demo-v2", String(id));
   }
 }
 

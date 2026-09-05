@@ -1,18 +1,150 @@
 import StorageService from "../components/StorageService.js";
 
 function fillPreview(previewData) {
-  const id = previewData.id.trim();
-  const title = previewData.title.trim();
-  const description = previewData.descriptionOG.trim();
-  const image = previewData.imageOG.trim();
-  const baseUrl = previewData.urlProject.trim();
-  const price = previewData.price.trim();
-  const time = previewData.time.trim();
-  const theme = previewData.theme.trim() || "theme-classic";
-  const address = previewData.address.trim();
+  const id = previewData.id.trim() || "";
+  const title = previewData.title.trim() || "";
+  const description = previewData.descriptionOG.trim() || "";
+  const image = previewData.imageOG.trim() || "";
+  const baseUrl = previewData.urlProject.trim() || "";
+  const price = previewData.price.trim() || "";
+  const bedrooms = previewData.bedrooms.trim() || "";
+  const bathrooms = previewData.bathrooms.trim() || "";
+  const parking = previewData.parking.trim() || "";
+  const construction = previewData.construction.trim() || "";
+  const time = previewData.time.trim() || Date.now().toString();
+  const theme = previewData.theme.trim() || "theme-modern";
+  const address = previewData.address.trim() || "";
+  const amenityIcons = {
+    alberca: "pool.svg",
+    gym: "gym.svg",
+    gimnasio: "gym.svg",
+    cine: "clapperboard.svg",
+    "sala de proyeccion": "film.svg",
+    padel: "padel.svg",
+    ludoteca: "playground.svg",
+    "area de juegos infantiles": "playground.svg",
+    "jardin con juegos infantiles": "playground.svg",
+    jacuzzi: "jacuzzi.svg",
+    sauna: "sauna.svg",
+    vapor: "steam.svg",
+    restaurante: "restaurant.svg",
+    asadores: "grill.svg",
+    asador: "grill.svg",
+    jardines: "garden.svg",
+    jardin: "garden.svg",
+    "areas verdes": "garden.svg",
+    "seguridad 24hrs": "security.svg",
+    "area de mascotas": "pets.svg",
+    "salon de eventos": "salon.svg",
+    "salon de fiestas": "salon.svg",
+    "business center": "business.svg",
+    "salon ingles": "tea.svg",
+    "sala de jovenes": "boy.svg",
+    "salon de juegos": "games.svg",
+    "jogging track": "jogging.svg",
+    "sky bar": "bar.svg",
+    bar: "bar.svg",
+    "social rooms": "social_room.svg",
+    fut: "soccer.svg",
+    cafeteria: "coffee.svg",
+    "cigar room": "cigarette.svg",
+    "sala de juntas": "meeting.svg",
+    "centro de copiado": "copy.svg",
+    lavanderia: "laundry.svg",
+    "area de lavado": "laundry.svg",
+    cocina: "kitchen.svg",
+    "cocina integral": "kitchen.svg",
+    terraza: "balcony.svg",
+    balcon: "balcony.svg",
+    patio: "deck.svg",
+    "cuarto TV": "tv-minimal.svg",
+    estudio: "library-big.svg",
+    closet: "checkroom.svg",
+    vestidor: "checkroom.svg",
+    bodega: "warehouse.svg",
+    yoga: "self_improvement.svg",
+    spinning: "directions_bike.svg",
+    lounge: "weekend.svg",
+  };
 
-  // Features puede venir como string o como array
-  let featuresRaw = previewData.features;
+  /* CARACTERISTICAS PRINCIPALES */
+  let mainFeaturesHtml = "";
+
+  if (Number(construction) > 0) {
+    mainFeaturesHtml += `
+    <div class="property__detail">
+      <img
+        class="property__detail-icon"
+        src="../images/icons/ruler.svg"
+        alt=""
+      />
+      <span class="property__detail-text">
+        ${construction} m²
+      </span>
+    </div>
+  `;
+  }
+
+  if (Number(bedrooms) > 0) {
+    mainFeaturesHtml += `
+    <div class="property__detail">
+      <img
+        class="property__detail-icon"
+        src="../images/icons/bed.svg"
+        alt=""
+      />
+      <span class="property__detail-text">
+        ${bedrooms} Recámara(s)
+      </span>
+    </div>
+  `;
+  }
+
+  if (Number(bathrooms) > 0) {
+    mainFeaturesHtml += `
+    <div class="property__detail">
+      <img
+        class="property__detail-icon"
+        src="../images/icons/bath.svg"
+        alt=""
+      />
+      <span class="property__detail-text">
+        ${bathrooms} Baño(s)
+      </span>
+    </div>
+  `;
+  }
+
+  if (Number(parking) > 0) {
+    mainFeaturesHtml += `
+    <div class="property__detail">
+      <img
+        class="property__detail-icon"
+        src="../images/icons/car.svg"
+        alt=""
+      />
+      <span class="property__detail-text">
+        ${parking} Estacionamiento(s)
+      </span>
+    </div>
+  `;
+  }
+
+  const mainFeaturesSection =
+    mainFeaturesHtml.trim() !== ""
+      ? `
+      <h2 class="property__section-title">
+        Características principales
+      </h2>
+
+      <div class="property__details-grid">
+        ${mainFeaturesHtml}
+      </div>
+    `
+      : "";
+
+  /* FEATURES (CARACTERÍSTICAS) */
+  let featuresRaw = previewData.features || "";
   let featuresList = [];
 
   if (Array.isArray(featuresRaw)) {
@@ -21,6 +153,95 @@ function fillPreview(previewData) {
     featuresList = featuresRaw.split(/[\n]/);
   }
 
+  /* Lo agregué porque features simpre manda un valor "" */
+  if (featuresList.length === 1 && featuresList[0] === "") {
+    featuresList = [];
+  }
+
+  const featuresHtml = featuresList
+    .map((f) => `<li class="property__feature">${f.trim()}</li>`)
+    .join("");
+
+  const featuresSection =
+    featuresHtml.trim() !== ""
+      ? `
+      <div>
+        <h2 class="property__section-title">Características</h2>
+
+        <ul class="property__features-list">
+          ${featuresHtml}
+        </ul>
+      </div>
+    `
+      : "";
+
+  /* AMENITIES */
+  const amenitiesRaw = previewData.amenities || "";
+  let amenitiesList = [];
+
+  if (Array.isArray(amenitiesRaw)) {
+    amenitiesList = amenitiesRaw;
+  } else if (typeof amenitiesRaw === "string") {
+    amenitiesList = amenitiesRaw.split(/[\n]/);
+  }
+
+  /* Lo agregué porque amenities simpre manda un valor "" */
+  if (amenitiesList.length === 1 && amenitiesList[0] === "") {
+    amenitiesList = [];
+  }
+
+  const amenitiesHtml = amenitiesList
+    .map((amenity) => {
+      function removerAcentos(texto) {
+        return texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+      }
+      const search = removerAcentos(amenity.trim()).toLowerCase();
+      const name = amenity.trim();
+
+      const icon = amenityIcons[search] || "check.svg";
+
+      return `
+      <div class="property__amenity">
+        <img
+          class="property__amenity-icon"
+          src="../images/icons/${icon}"
+          alt="${name}"
+        />
+        <span class="property__amenity-text">${name}</span>
+      </div>
+    `;
+    })
+    .join("");
+
+  const amenitiesSection =
+    amenitiesHtml.trim() !== ""
+      ? `
+      <div class="property__amenities-section">
+        <h2 class="property__section-title">
+          Amenidades
+        </h2>
+
+        <div class="property__amenities-grid">
+          ${amenitiesHtml}
+        </div>
+      </div>
+    `
+      : "";
+
+  const descriptionSection =
+    description.trim() !== ""
+      ? `
+      <div>
+        <h2 class="property__section-title">
+          Descripción
+        </h2>
+
+        <p class="property__description">${description}</p>
+      </div>
+    `
+      : "";
+
+  /* GALERIA */
   const gallery = previewData.gallery || [];
 
   if (!image.startsWith("https://")) {
@@ -33,36 +254,41 @@ function fillPreview(previewData) {
     return;
   }
 
-  // Ahora el preview vive dentro de /previews/
   const previewUrl = `${baseUrl}previews/propiedad${id}${time}_preview.html`;
-
-  const featuresHtml = featuresList
-    .map((f) => `<li class="property__feature">${f.trim()}</li>`)
-    .join("");
 
   const absoluteGallery = gallery.map((img) => {
     const absolutePath = baseUrl + img.slice(2);
     return absolutePath;
   });
 
+  const sliderImages = absoluteGallery.length > 0 ? absoluteGallery : [image];
+
+  const sliderImagesHtml = sliderImages
+    .map(
+      (src) => `
+      <img
+        class="property__hero-image"
+        src="${src}"
+        alt="${title}"
+      />
+    `,
+    )
+    .join("");
+
+  /* MAPA */
   function getMapLink() {
     return `"https://www.google.com/maps?q=${encodeURIComponent(address)}"`;
   }
   const mapLink = getMapLink();
 
+  /* AGENTE */
   function getAgentBlock(showAgent) {
     if (!showAgent) return "";
 
     return `
   <div class="property__cta">
-    <a class="property__cta-button" href="https://wa.me/5215552178925?text=${encodeURIComponent(`Hola, estoy interesado en la propiedad "${title}".\n¿Podrías darme más información?`)}" target="_blank  ">
-      Contactar por WhatsApp
-    </a>
-  </div>
-  <div class="property__agent">
-    <div class="property__agent-broker">&nbsp;Sergio Verástegui Vega</div>
-    <div class="property__agent-phone">
-      <a class="property__agent-number" href="tel:5552178925">&nbsp;55 5217 8925</a>
+    <div class="property__cta-button">
+      Contacto no disponible en la demo pública
     </div>
   </div>
   `;
@@ -92,8 +318,30 @@ function fillPreview(previewData) {
 
     <section class="property__content">
 
-      <div>
-        <img class="property__hero-image" src="${image}" alt="${title}" />
+      <div class="property__hero-slider">
+        <div class="property__hero-track">
+          ${sliderImagesHtml}
+        </div>
+
+        <button class="property__btn property__btn-left" id="btnBack">
+          <img
+            class="property__btn_image"
+            src="${baseUrl}images/arrow_back.png"
+            alt="Left arrow"
+          >
+        </button>
+
+        <button class="property__btn property__btn-right" id="btnForward">
+          <img
+            class="property__btn_image"
+            src="${baseUrl}images/arrow_forward.png"
+            alt="Right arrow"
+          >
+        </button>
+      </div>
+
+      <div class="property__counter" id="imageCounter">
+        1 / ${absoluteGallery.length || 1}
       </div>
 
       <div>
@@ -101,31 +349,34 @@ function fillPreview(previewData) {
         <p class="property__price">${price}</p>
       </div>
 
-      <div>
-        <ul class="property__features-list">
-          ${featuresHtml}
-        </ul>
-      </div>
+      ${mainFeaturesSection}
 
-      <div>
-        <p class="property__description">${description}</p>
-      </div>
+      ${featuresSection}
 
-      <div class="property__image-gallery">
-        <img class="property__image" src="${absoluteGallery[0]}" alt="${title}">
-        <button class="property__btn property__btn-left" id="btnBack">
-          <img class="property__btn_image" src="${baseUrl}images/arrow_back.png" alt="Left arrow">
-        </button>
-        <button class="property__btn property__btn-right" id="btnForward">
-          <img class="property__btn_image" src="${baseUrl}images/arrow_forward.png" alt="Right arrow">
-        </button>
-      </div>
-      <div class="property__counter" id="imageCounter">
-        1 / 1
-      </div>
-        ${getAgentBlock(showAgent)}
+      ${amenitiesSection}
+
+      ${descriptionSection}
+
+      ${getAgentBlock(showAgent)}
+
       <div>
       <p class="property__location-label">${address}</p>
+      </div>
+
+      <div class="property__map-section">
+        <h2 class="property__section-title">
+          Ubicación
+        </h2>
+
+        <iframe
+          class="property__map"
+          src="https://www.google.com/maps?q=${encodeURIComponent(address)}&output=embed"
+          loading="lazy"
+          allowfullscreen>
+        </iframe>
+      </div>
+
+      <div>
         <a
         href=${mapLink}
         target="_blank"
@@ -135,25 +386,33 @@ function fillPreview(previewData) {
         </a>
       </div>
     </section>
-
   </main>
 <script>
   (function () {
     const images = ${JSON.stringify(absoluteGallery)};
     let currentIndex = 0;
 
-    const img = document.querySelector(".property__image");
+    const img = document.querySelector(".property__hero-image");
     const btnBack = document.getElementById("btnBack");
     const btnForward = document.getElementById("btnForward");
     const counter = document.getElementById("imageCounter");
 
+    // Precargar todas las imágenes de la galería
+    const preloadedImages = [];
+
+    images.forEach((url) => {
+      const preload = new Image();
+      preload.src = url;
+      preloadedImages.push(preload);
+    });
+
     if (!img || !btnBack || !btnForward || images.length === 0) return;
 
     function updateSlider() {
-      img.src = images[currentIndex];
-
+        img.src = images[currentIndex];
       if (counter) {
-        counter.textContent = (currentIndex + 1) + " / " + images.length;
+        counter.textContent =
+          (currentIndex + 1) + " / " + images.length;
       }
     }
 
@@ -170,6 +429,39 @@ function fillPreview(previewData) {
         (currentIndex - 1 + images.length) % images.length;
       updateSlider();
     });
+
+    // Swipe support
+    let startX = 0;
+    let endX = 0;
+
+    img.addEventListener("touchstart", (e) => {
+      startX = e.touches[0].clientX;
+    });
+
+    img.addEventListener("touchend", (e) => {
+      endX = e.changedTouches[0].clientX;
+      handleSwipe();
+    });
+
+    function handleSwipe() {
+      const diff = startX - endX;
+
+      // sensibilidad mínima
+      if (Math.abs(diff) < 50) return;
+
+      if (diff > 0) {
+        // swipe izquierda → anterior
+        currentIndex =
+          (currentIndex - 1 + images.length) % images.length;
+
+      } else {
+        // swipe derecha → siguiente
+        currentIndex = (currentIndex + 1) % images.length;
+      }
+
+      updateSlider();
+    }
+
   })();
 
 </script>
@@ -178,8 +470,10 @@ function fillPreview(previewData) {
 </html>`;
   }
 
-  StorageService.setMaxPublishedId(id);
-
+  /*--------- En caso de que estemos editando una propiedad ya publicada ---------*/
+  if (Number(id) > StorageService.getMaxPublishedId()) {
+    StorageService.setMaxPublishedId(id);
+  }
   const htmlWithAgent = generateHTML(true);
   const htmlWithoutAgent = generateHTML(false);
 

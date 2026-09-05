@@ -24,9 +24,17 @@ class PopupWithForm extends Popup {
 
   _getInputValues() {
     if (this._popup.querySelector(".popup__form").id === "new-card-form") {
-      this._setCardTime();
+      const timeInput = this._popup.querySelector(
+        ".popup__input_type_card-time",
+      );
+
+      if (!timeInput.value) {
+        this._setCardTime();
+      }
     }
+
     const formData = {};
+
     this._inputList.forEach((input) => {
       if (input.name === "gallery") {
         const pattern = /[^,;:\n\t]+/g;
@@ -36,6 +44,7 @@ class PopupWithForm extends Popup {
         formData[input.name] = input.value;
       }
     });
+
     return formData;
   }
 
@@ -48,7 +57,7 @@ class PopupWithForm extends Popup {
       .addEventListener("submit", (evt) => {
         evt.preventDefault();
         evt.stopPropagation();
-        this._handleFormSubmit(this._getInputValues(), this._type);
+        this._handleFormSubmit(this._getInputValues() /*, this._type*/);
       });
   }
 

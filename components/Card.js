@@ -13,6 +13,11 @@ class Card {
     this._hero = data.hero;
     this._title = data.title;
     this._price = data.price;
+    this._bedrooms = data.bedrooms;
+    this._bathrooms = data.bathrooms;
+    this._parking = data.parking;
+    this._construction = data.construction;
+    this._amenities = data.amenities;
     this._description = data.description;
     this._features = data.features;
     this._gallery = data.gallery;
@@ -41,6 +46,14 @@ class Card {
   _setEventListeners() {
     const cardImage = this._cardElement.querySelector(".card__image");
     cardImage.addEventListener("click", () => {
+      const publishedMax = StorageService.getMaxPublishedId();
+      if (Number(this._id) > publishedMax) {
+        alert(
+          "Esta propiedad aún no está publicada.\n\n" +
+            "Debes generar el preview antes de poder compartirla.",
+        );
+        return;
+      }
       if (this._id !== 0) {
         this._handleCardClick(this._id, this._time);
       }
@@ -73,19 +86,20 @@ class Card {
     const cardWhatsappButton = this._cardElement.querySelector(
       ".card__whatsapp-button",
     );
+
     cardWhatsappButton.addEventListener("click", (evt) => {
       evt.stopPropagation();
 
       const publishedMax = StorageService.getMaxPublishedId();
-      if (publishedMax && Number(id) > publishedMax) {
+      if (Number(this._id) > publishedMax) {
         alert(
           "Esta propiedad aún no está publicada.\n\n" +
-            "Debes generar el preview y subirlo a GitHub dentro de la carpeta /previews para poder compartirla.",
+            "Debes generar el preview antes de poder compartirla.",
         );
         return;
       }
 
-      const previewUrl = `https://sergiovv2025.github.io/property-sheet-generator/previews/propiedad${this._id}${this._time}_preview.html`;
+      const previewUrl = `https://sergiovv2025.github.io/property-sheet-generator/previews/propiedad${this._id}${this._time}_preview_SNT.html`;
 
       const message = `Te comparto esta propiedad:\n${previewUrl}`;
 
@@ -117,12 +131,23 @@ class Card {
     });
   }
 
-  _handleLoadError() {
+  // _handleLoadError() {
+  //   this._spinner.classList.add("card__spinner_hidden");
+  //   alert("Image not loaded. ERROR! ERROR!");
+  // }
+
+  _handleLoadError(evt) {
     this._spinner.classList.remove("card__spinner_visible");
-    alert("Image not loaded. ERROR! ERROR!");
+    alert("Image not loaded. ERROR! ERROR!" + evt.target.src);
   }
 
   _handleImageLoad(evt) {
+    // alert(
+    //   "Image loaded successfully!\n" +
+    //     evt.target.className +
+    //     "\n" +
+    //     evt.target.src,
+    // );
     this._spinner.classList.remove("card__spinner_visible");
     evt.target.classList.add("card__image_loaded");
     console.log("imagen cargada!!!  " + evt.target.src);
@@ -130,6 +155,8 @@ class Card {
 
   _loadImage(imageElement, loadCallback, errorCallback) {
     this._spinner.classList.add("card__spinner_visible");
+    // img.addEventListener("load", loadCallback);
+    // img.addEventListener("error", errorCallback);
     imageElement.onload = loadCallback;
     imageElement.onerror = errorCallback;
     imageElement.src = this._hero;
@@ -148,28 +175,55 @@ class Card {
     this._spinner = this._cardElement.querySelector(".card__spinner");
 
     const cardImage = this._cardElement.querySelector(".card__image");
+    // cardImage.src = this._hero;
     this._loadImage(
       cardImage,
       this._handleImageLoad.bind(this),
       this._handleLoadError.bind(this),
     );
+    // cardImage.alt = this._hero;
 
     const cardPrice = this._cardElement.querySelector(".card__price");
     cardPrice.textContent = this._price;
 
+    const cardBedrooms = this._cardElement.querySelector(".card__bedrooms");
+    cardBedrooms.textContent = `${this._bedrooms} recámara(s)`;
+
+    const cardBathrooms = this._cardElement.querySelector(".card__bathrooms");
+    cardBathrooms.textContent = `${this._bathrooms} baño(s)`;
+
+    const cardParking = this._cardElement.querySelector(".card__parking");
+    cardParking.textContent = `${this._parking} estacionamiento(s)`;
+
+    const cardConstruction = this._cardElement.querySelector(
+      ".card__construction",
+    );
+    cardConstruction.textContent = `${this._construction} m²`;
+
+    const cardFeatures = this._cardElement.querySelector(".card__features");
+    let featuresStringDisplay = "";
+    const pattern = /[^;\n\t]+/g;
+    if (this._features !== "") {
+      const featuresArray = this._features.match(pattern);
+      for (let feature of featuresArray) {
+        featuresStringDisplay += "- " + feature + "<br>";
+      }
+    }
+    cardFeatures.innerHTML = featuresStringDisplay;
+
+    const cardAmenities = this._cardElement.querySelector(".card__amenities");
+    if (this._amenities) {
+      const amenitiesArray = this._amenities.match(pattern);
+      let amenitiesStringDisplay = "";
+      for (let amenitie of amenitiesArray) {
+        amenitiesStringDisplay += "- " + amenitie + "<br>";
+      }
+      cardAmenities.innerHTML = amenitiesStringDisplay;
+    }
+
     const cardDescription =
       this._cardElement.querySelector(".card__description");
     cardDescription.textContent = this._description;
-
-    const cardFeatures = this._cardElement.querySelector(".card__features");
-    const pattern = /[^;\n\t]+/g;
-    const featuresArray = this._features.match(pattern);
-    let featuresStringDisplay = "";
-    for (let feature of featuresArray) {
-      featuresStringDisplay += "- " + feature + "<br>";
-    }
-
-    cardFeatures.innerHTML = featuresStringDisplay;
 
     const imageGallery = this._cardElement.querySelector(".card__gallery");
     for (let i = 0; i < this._gallery.length; i++) {

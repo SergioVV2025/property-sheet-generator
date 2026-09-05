@@ -30,33 +30,33 @@ const propertiesData = StorageService.getProperties(Properties);
 
 /*---------- Función callback para manejar el click en la imagen de la tarjeta ----------*/
 
-// const handleCardClick = (id, time) => {
-//   const publishedMax = StorageService.getMaxPublishedId();
-
-//   if (Number(id) > publishedMax) {
-//     alert(
-//       "Esta propiedad aún no está publicada.\n\n" +
-//         "Debes generar el preview y subirlo a GitHub dentro de la carpeta /previews para poder compartirla.",
-//     );
-//     return;
-//   } else {
-//     window.open(`./previews/propiedad${id}${time}_preview.html`, "_blank");
-//   }
-// };
-
-const handleCardClick = (id, time) => {
+const handleCardClick = async (id, time) => {
   const publishedMax = StorageService.getMaxPublishedId();
 
-  // 👉 si NO hay nada publicado, deja pasar todo (modo demo)
-  if (publishedMax && Number(id) > publishedMax) {
+  if (Number(id) > publishedMax) {
     alert(
       "Esta propiedad aún no está publicada.\n\n" +
-        "Debes generar el preview y subirlo a GitHub dentro de la carpeta /previews para poder compartirla.",
+        "Debes generar el preview antes de poder compartirla.",
     );
     return;
   }
 
-  window.open(`./previews/propiedad${id}${time}_preview.html`, "_blank");
+  const previewPath = `./previews/propiedad${id}${time}_preview.html`;
+
+  try {
+    const response = await fetch(previewPath, {
+      method: "HEAD",
+    });
+
+    if (!response.ok) {
+      alert("El preview de esta propiedad todavía no ha sido generado.");
+      return;
+    }
+
+    window.open(previewPath, "_blank");
+  } catch (error) {
+    alert("No fue posible verificar el preview de esta propiedad.");
+  }
 };
 
 /*---------- Initial Properties en properties.js ----------*/
@@ -113,8 +113,13 @@ function handleCardFormSubmit(formData) {
       hero: formData.hero,
       title: formData.title,
       price: formData.price,
-      description: formData.description,
+      bedrooms: formData.bedrooms,
+      bathrooms: formData.bathrooms,
+      parking: formData.parking,
+      construction: formData.construction,
       features: formData.features,
+      amenities: formData.amenities,
+      description: formData.description,
       gallery: formData.gallery,
       time: formData.time,
       theme: formData.theme,
@@ -237,7 +242,12 @@ function handlePreviewFormSubmit(formData) {
     imageOG: formData.imageOG,
     urlProject: formData.urlProject,
     price: formData.price,
+    bedrooms: formData.bedrooms,
+    bathrooms: formData.bathrooms,
+    parking: formData.parking,
+    construction: formData.construction,
     features: formData.features,
+    amenities: formData.amenities,
     gallery: formData.gallery,
     time: formData.time,
     theme: formData.theme,
@@ -304,8 +314,8 @@ function handleExportData() {
   );
 
   const data = {
-    properties: JSON.parse(localStorage.getItem("properties") || "[]"),
-    publishedMaxId: Number(localStorage.getItem("publishedMaxId") || 0),
+    properties: JSON.parse(localStorage.getItem("properties-demo-v2") || "[]"),
+    publishedMaxId: Number(localStorage.getItem("publishedMaxId-demo-v2") || 0),
   };
 
   const blob = new Blob([JSON.stringify(data, null, 2)], {
@@ -343,11 +353,14 @@ function handleImportSubmit() {
           isLiked: p.isLiked ?? false,
         }));
 
-        localStorage.setItem("properties", JSON.stringify(normalized));
+        localStorage.setItem("properties-demo-v2", JSON.stringify(normalized));
       }
 
       if (typeof data.publishedMaxId === "number") {
-        localStorage.setItem("publishedMaxId", String(data.publishedMaxId));
+        localStorage.setItem(
+          "publishedMaxId-demo-v2",
+          String(data.publishedMaxId),
+        );
       }
 
       alert("Respaldo cargado correctamente");
