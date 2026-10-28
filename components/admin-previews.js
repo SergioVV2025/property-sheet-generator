@@ -261,15 +261,22 @@ function fillPreview(previewData) {
     return absolutePath;
   });
 
-  const sliderImages = absoluteGallery.length > 0 ? absoluteGallery : [image];
+  const sliderImages = [image, ...absoluteGallery];
 
-  const sliderImagesHtml = sliderImages
+  const infiniteSliderImages = [
+    sliderImages[sliderImages.length - 1],
+    ...sliderImages,
+    sliderImages[0],
+  ];
+
+  const sliderImagesHtml = infiniteSliderImages
     .map(
       (src) => `
       <img
         class="property__hero-image"
         src="${src}"
         alt="${title}"
+        draggable="false"
       />
     `,
     )
@@ -341,7 +348,7 @@ function fillPreview(previewData) {
       </div>
 
       <div class="property__counter" id="imageCounter">
-        1 / ${absoluteGallery.length || 1}
+        1 / ${sliderImages.length}
       </div>
 
       <div>
@@ -389,10 +396,10 @@ function fillPreview(previewData) {
   </main>
 <script>
   (function () {
-    const images = ${JSON.stringify(absoluteGallery)};
-    let currentIndex = 0;
+    const images = ${JSON.stringify(sliderImages)};
+    let currentIndex = 1;
 
-    const img = document.querySelector(".property__hero-image");
+    const track = document.querySelector(".property__hero-track");
     const btnBack = document.getElementById("btnBack");
     const btnForward = document.getElementById("btnForward");
     const counter = document.getElementById("imageCounter");
@@ -406,28 +413,67 @@ function fillPreview(previewData) {
       preloadedImages.push(preload);
     });
 
-    if (!img || !btnBack || !btnForward || images.length === 0) return;
+    if (!track || !btnBack || !btnForward || images.length === 0) return;
 
     function updateSlider() {
-        img.src = images[currentIndex];
+      track.style.transform =
+        "translateX(-" + (currentIndex * 100) + "%)";
+
       if (counter) {
+        const visibleIndex =
+          currentIndex === 0
+            ? images.length
+            : currentIndex > images.length
+              ? 1
+              : currentIndex;
+
         counter.textContent =
-          (currentIndex + 1) + " / " + images.length;
+          visibleIndex + " / " + images.length;
       }
     }
 
     // 🔹 render inicial
+    track.style.transition = "none";
     updateSlider();
+    void track.offsetWidth;
+    track.style.transition = "";
 
-    btnForward.addEventListener("click", () => {
-      currentIndex = (currentIndex + 1) % images.length;
-      updateSlider();
-    });
+   btnForward.addEventListener("click", () => {
+    if (currentIndex >= images.length + 1) return;
 
-    btnBack.addEventListener("click", () => {
-      currentIndex =
-        (currentIndex - 1 + images.length) % images.length;
+    currentIndex++;
+    updateSlider();
+   });
+
+   btnBack.addEventListener("click", () => {
+    if (currentIndex <= 0) return;
+
+    currentIndex--;
+    updateSlider();
+   });
+
+   track.addEventListener("transitionend", (event) => {
+      if (event.propertyName !== "transform") return;
+
+      if (currentIndex === images.length + 1) {
+        // Llegamos al clon de la primera imagen
+        currentIndex = 1;
+      } else if (currentIndex === 0) {
+        // Llegamos al clon de la última imagen
+        currentIndex = images.length;
+      } else {
+        return;
+      }
+
+      // Reposicionamos sin animación
+      track.style.transition = "none";
       updateSlider();
+
+      // Forzamos al navegador a aplicar la nueva posición
+      void track.offsetWidth;
+
+      // Restauramos la transición
+      track.style.transition = "";
     });
 
     // Swipe support

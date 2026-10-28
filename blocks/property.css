@@ -75,6 +75,8 @@ body {
   /* transition: opacity 0.3s ease-in-out; */
   display: block;
   touch-action: pan-y;
+  -webkit-user-drag: none;
+  user-select: none;
 }
 
 /* .property__hero {       (Fichas V!)
