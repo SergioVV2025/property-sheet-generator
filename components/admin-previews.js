@@ -478,35 +478,30 @@ function fillPreview(previewData) {
 
     // Swipe support
     let startX = 0;
-    let endX = 0;
 
-    img.addEventListener("touchstart", (e) => {
+    track.addEventListener("touchstart", (e) => {
       startX = e.touches[0].clientX;
-    });
+    }, { passive: true });
 
-    img.addEventListener("touchend", (e) => {
-      endX = e.changedTouches[0].clientX;
-      handleSwipe();
-    });
-
-    function handleSwipe() {
+    track.addEventListener("touchend", (e) => {
+      const endX = e.changedTouches[0].clientX;
       const diff = startX - endX;
 
-      // sensibilidad mínima
+      // Ignorar movimientos demasiado pequeños
       if (Math.abs(diff) < 50) return;
 
       if (diff > 0) {
-        // swipe izquierda → anterior
-        currentIndex =
-          (currentIndex - 1 + images.length) % images.length;
-
+        // Deslizar hacia la izquierda → siguiente imagen
+        if (currentIndex >= images.length + 1) return;
+        currentIndex++;
       } else {
-        // swipe derecha → siguiente
-        currentIndex = (currentIndex + 1) % images.length;
+        // Deslizar hacia la derecha → imagen anterior
+        if (currentIndex <= 0) return;
+        currentIndex--;
       }
 
       updateSlider();
-    }
+    }, { passive: true });
 
   })();
 
