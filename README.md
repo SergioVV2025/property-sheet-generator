@@ -1,155 +1,233 @@
-Property Sheet Generator
+# Property Sheet Generator
 
-Aplicación web para la gestión de fichas técnicas de propiedades inmobiliarias, que implementa un sistema completo de administración en frontend con persistencia de datos y manejo de estado local.
+**Generador de fichas inmobiliarias desarrollado con JavaScript, HTML y CSS, sin frameworks ni backend.**
 
-Permite a los usuarios crear, editar, visualizar y persistir información de propiedades mediante una interfaz dinámica e interactiva.
+Aplicación web que permite administrar información de propiedades y generar fichas de presentación con fotografías, características y enlaces para compartir.
 
-🚀 Demo
+El proyecto está orientado a simplificar la preparación de material inmobiliario mediante una interfaz de administración y plantillas visuales reutilizables.
 
-👉 Live App: https://sergiovv2025.github.io/property-sheet-generator/
-👉 Repositorio: https://github.com/SergioVV2025/property-sheet-generator
+Fue desarrollado como una aplicación frontend independiente, con persistencia local y generación de páginas HTML estáticas.
 
-💡 Aplicación completamente funcional: permite crear, editar, eliminar y persistir propiedades en el navegador.
+## Demo
 
-⚡ Quick Preview
+- **[Ver aplicación](https://sergiovv2025.github.io/property-sheet-generator/)**
+- **[Repositorio en GitHub](https://github.com/SergioVV2025/property-sheet-generator)**
 
-- Crea propiedades con múltiples campos
-- Edita información en tiempo real
-- Guarda automáticamente en el navegador
-- Exporta e importa datos manualmente
-- Visualiza fichas completas con imágenes
+> **Estado del proyecto:** Demo funcional. No incluye backend, base de datos remota ni publicación automática de propiedades.
 
-📸 Preview
+## Vista previa
 
-### Vista de propiedades
+### Panel de propiedades
 
-![Property Cards](./images/cards.jpg)
+![Panel de propiedades](./images/cards.jpg)
 
-### Vista previa de ficha
+### Ficha inmobiliaria
 
-![Preview Modal](./images/new_preview.jpg)
+![Vista previa de ficha](./images/new_preview.jpg)
 
-### Creación de propiedad
+### Creación de propiedades
 
-![New Property](./images/new_property.jpg)
+![Formulario de creación](./images/new_property.jpg)
 
 ### Confirmación de eliminación
 
-![Confirmation Popup](./images/confirmation_popup.jpg)
+![Confirmación de eliminación](./images/confirmation_popup.jpg)
 
 ### Integración con WhatsApp
 
-![WhatsApp Link](./images/whatsapp_link.jpg)
+![Enlace compartido](./images/whatsapp_link.jpg)
 
-### Compartir propiedades
+### Vista previa al compartir propiedades
 
-![WhatsApp Cards](./images/whatsapp_cards.jpg)
+![Vista previa en WhatsApp](./images/whatsapp_cards.jpg)
 
-🧩 Descripción
+## Funcionalidades
 
-Este proyecto implementa un sistema tipo CRUD en el frontend, enfocado en la gestión de datos estructurados (propiedades inmobiliarias).
+### Administración de propiedades
 
-Incluye persistencia local, exportación/importación de datos y una interfaz basada en componentes reutilizables.
+- Crear, consultar, editar y eliminar propiedades.
+- Gestionar información como descripción, precio, ubicación, características y fotografías.
+- Validar formularios antes de guardar información.
+- Confirmar acciones de eliminación.
+- Marcar propiedades como favoritas.
 
-El objetivo fue simular el comportamiento de una aplicación real sin depender de servicios externos.
+### Generación de fichas inmobiliarias
 
-✨ Features
+- Crear páginas HTML de presentación a partir de los datos de una propiedad.
+- Mostrar fotografías mediante una galería interactiva.
+- Navegar imágenes con controles y gestos táctiles.
+- Utilizar diferentes estilos visuales para presentar las propiedades.
+- Incorporar enlaces de contacto mediante WhatsApp.
+- Configurar metadatos Open Graph para compartir fichas en redes sociales y aplicaciones de mensajería.
 
-- Gestión completa de propiedades (crear, editar, eliminar)
-- Persistencia de datos en navegador mediante localStorage
-- Exportación e importación de datos (backup manual)
-- Sistema de “likes” para marcar propiedades favoritas
-- Vista previa dinámica con navegación de imágenes
-- Validación de formularios en tiempo real
-- Confirmación de acciones críticas mediante popups
+### Persistencia y respaldo
 
-🛠️ Tech Stack
+- Guardar información mediante `localStorage`.
+- Recuperar propiedades al volver a abrir la aplicación en el mismo navegador.
+- Exportar e importar datos mediante archivos de respaldo.
 
-- HTML5
-- CSS3
-- JavaScript (ES6+)
-- Programación Orientada a Objetos (OOP)
-- Manipulación del DOM
-- localStorage
+Los datos permanecen en el navegador utilizado. No existe sincronización entre dispositivos ni almacenamiento remoto.
 
-🏗️ Arquitectura
+## Tecnologías
 
-El proyecto sigue un enfoque modular basado en componentes:
+| Tecnología      | Aplicación                                        |
+| --------------- | ------------------------------------------------- |
+| HTML5           | Estructura de la interfaz y fichas generadas      |
+| CSS3            | Diseño responsive, temas visuales y animaciones   |
+| JavaScript ES6+ | Lógica de negocio e interactividad                |
+| DOM API         | Renderizado y actualización de componentes        |
+| localStorage    | Persistencia local                                |
+| JSON            | Serialización, exportación e importación de datos |
+| Git y GitHub    | Control de versiones                              |
+| GitHub Pages    | Publicación de la demo y fichas estáticas         |
 
-- **Cards** → Representación visual de propiedades
-- **Forms** → Captura y validación de datos
-- **Popups** → Interacciones y confirmaciones
-- **State Management** (local) → Manejo de datos en memoria y sincronización con localStorage
+## Arquitectura
 
-Se aplicó separación de responsabilidades para mantener el código escalable y mantenible.
+El proyecto utiliza JavaScript modular y una estructura basada en componentes, sin depender de un framework frontend.
 
-🧠 Decisiones técnicas
+Las principales responsabilidades están separadas en:
 
-- Uso de localStorage para simular persistencia sin backend
-- Serialización de datos con JSON para exportación/importación
-- Uso de clases en JavaScript para estructurar lógica (OOP)
-- Renderizado dinámico para actualizar la UI sin recargar la página
+- **Componentes:** tarjetas, formularios, ventanas emergentes y elementos reutilizables.
+- **Gestión de datos:** operaciones sobre propiedades y sincronización con `localStorage`.
+- **Validación:** comprobación de los datos introducidos en formularios.
+- **Generación de fichas:** construcción de documentos HTML a partir de los datos almacenados.
+- **Presentación:** estilos CSS, temas visuales y comportamiento responsive.
 
-📱 Comportamiento responsive
+Esta organización permite mantener separadas la lógica de administración, la generación de contenido y su presentación visual.
 
-La aplicación está optimizada para uso en escritorio debido a la complejidad de los formularios de creación y edición de propiedades.
+## Decisiones técnicas
 
-En dispositivos móviles, la experiencia está enfocada en:
+### Frontend sin backend
 
-- Visualizar propiedades
-- Navegar vistas previas
-- Compartir propiedades vía WhatsApp
+La aplicación utiliza `localStorage` porque fue diseñada como una herramienta frontend independiente.
 
-La creación y edición de propiedades se recomienda en escritorio para una mejor experiencia de usuario.
+Esto permite ejecutar la demo sin configurar servidores ni servicios de bases de datos.
 
-📦 Instalación
+Como contrapartida, los datos dependen del almacenamiento del navegador y no están disponibles automáticamente en otros dispositivos.
 
+### Fichas HTML independientes
+
+Las fichas se generan como documentos HTML estáticos.
+
+Este enfoque permite compartir páginas individuales sin requerir que el destinatario acceda al panel de administración.
+
+La publicación de estos archivos y sus recursos se realiza por separado; la aplicación no dispone de un servicio de despliegue automático.
+
+### Integración con WhatsApp
+
+Las fichas incorporan metadatos Open Graph para definir el título, la descripción y la imagen que pueden utilizar las plataformas al generar vistas previas de los enlaces.
+
+La visualización final depende también del procesamiento y la caché de cada plataforma.
+
+## Preparación de fotografías
+
+Para mejorar el rendimiento de las fichas y facilitar la generación de vistas previas en WhatsApp, se recomienda optimizar las fotografías antes de utilizarlas.
+
+**Configuración recomendada:**
+
+- Formato: JPG/JPEG.
+- Dimensiones: ajustar proporcionalmente dentro de un máximo de 1200 × 630 píxeles.
+- Peso recomendado: inferior a 300 KB.
+- Calidad de compresión: aproximadamente 85 %.
+- Mantener la proporción original, sin deformar ni recortar.
+- Utilizar URLs públicas HTTPS para las fotografías compartidas mediante Open Graph.
+
+Estas recomendaciones se basan en pruebas realizadas con las fichas de demostración. No constituyen requisitos oficiales ni garantizan que todas las plataformas generen una vista previa.
+
+### Optimización con ImageMagick
+
+```bash
+convert imagen-original.jpg \
+  -resize 1200x630 \
+  -strip \
+  -quality 85 \
+  imagen-optimizada.jpg
+```
+
+Verificar el resultado:
+
+```bash
+identify -format '%m | %wx%h | %b\n' imagen-optimizada.jpg
+```
+
+El proceso mantiene la proporción original de la fotografía y evita recortes.
+
+**Nota:** la aplicación no redimensiona ni comprime imágenes automáticamente. Su preparación corresponde al usuario.
+
+## Instalación local
+
+Clonar el repositorio:
+
+```bash
 git clone https://github.com/SergioVV2025/property-sheet-generator.git
 cd property-sheet-generator
+```
 
-Abrir index.html en el navegador.
+Abrir `index.html` en el navegador.
 
-📁 Estructura del proyecto
-/project-root
-│── index.html
-│── blocks/
-│── components/
-│── images/
-│── pages/
-│── previews/
-│── respaldos/
-│── utils/
-│── vendor/
+Para realizar pruebas de desarrollo, también puede utilizarse un servidor local, por ejemplo mediante la extensión Live Server de VS Code.
 
-🗺️ Roadmap
+No requiere instalación de dependencias mediante npm.
 
-- Integración con backend (API REST)
-- Persistencia en base de datos
-- Autenticación de usuarios
-- Deploy en entorno productivo
-- Mejora de UI/UX
+## Estructura del proyecto
 
-📚 Lecciones aprendidas
+```text
+property-sheet-generator/
+├── index.html
+├── blocks/
+├── components/
+├── images/
+├── pages/
+├── previews/
+├── respaldos/
+├── utils/
+└── vendor/
+```
 
-- Manejo de estado en aplicaciones frontend sin frameworks
-- Importancia de la separación de responsabilidades
-- Serialización y persistencia de datos en el cliente
-- Diseño de interfaces dinámicas basadas en eventos
+- `blocks/`: estilos de los componentes.
+- `components/`: componentes y lógica de la interfaz.
+- `images/`: recursos gráficos.
+- `pages/`: módulos relacionados con las vistas.
+- `previews/`: fichas HTML generadas.
+- `respaldos/`: archivos de respaldo.
+- `utils/`: funciones auxiliares.
+- `vendor/`: recursos de terceros.
 
-⚠️ Nota
+## Limitaciones actuales
 
-Los datos e imágenes utilizados son simulados y tienen fines demostrativos.
+Property Sheet Generator es una demostración funcional y no un servicio de administración inmobiliaria en producción.
 
-🧪 Testing manual
+Actualmente:
 
-La aplicación fue probada manualmente cubriendo:
+- No incluye autenticación ni cuentas de usuario.
+- No utiliza una base de datos remota.
+- No sincroniza propiedades entre dispositivos.
+- No publica automáticamente las fichas generadas.
+- No optimiza fotografías de forma automática.
+- La administración de propiedades está orientada principalmente a escritorio.
 
-- Creación de múltiples propiedades
-- Edición y persistencia de cambios
-- Eliminación con confirmación
-- Exportación e importación de datos
-- Recarga de la página manteniendo estado
+Las fichas publicadas pueden consultarse y compartirse desde dispositivos móviles.
 
-👨‍💻 Autor
+## Validación
 
-Sergio Verástegui Vega
+Durante el desarrollo se realizaron pruebas manuales de:
+
+- Creación, edición y eliminación de propiedades.
+- Persistencia de información en el navegador.
+- Exportación e importación de respaldos.
+- Navegación de galerías con controles y gestos táctiles.
+- Visualización responsive de fichas.
+- Publicación de páginas estáticas.
+- Generación de vistas previas de enlaces en WhatsApp.
+
+No se incluye una suite automatizada de pruebas.
+
+## Autor
+
+**Sergio Verástegui Vega**
+
+Desarrollo frontend con JavaScript, HTML y CSS.
+
+---
+
+_Proyecto de demostración desarrollado con fines educativos y de portafolio. Los datos e imágenes de las propiedades son ilustrativos._
